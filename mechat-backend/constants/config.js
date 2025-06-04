@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-dotenv.config(); 
+// import dotenv from "dotenv";
+// dotenv.config(); 
 
 const corsOptions = {
   origin: [
@@ -7,7 +7,7 @@ const corsOptions = {
     "http://localhost:4173",
     // "https://talktalknow.vercel.app",
     process.env.CLIENT_URL,
-  ],
+  ].filter(Boolean),
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };
