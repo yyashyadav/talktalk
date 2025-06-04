@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/talktalk-icon.png" />
+    <link rel="apple-touch-icon" href="/talktalk-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TalkTalk</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <style>
+      /* Fancy Selection Style */
+      ::selection {
+        /* background: linear-gradient(120deg, rgba(95, 185, 169, 0.4), rgba(92, 157, 203, 0.4)); */
+        background: rgba(95, 185, 169, 0.3);
+        color: #2c3e50;
+      }
+      ::-moz-selection {
+        background: rgba(95, 185, 169, 0.3);
+        color: #2c3e50;
+      }
+      ::-webkit-selection {
+        background: rgba(95, 185, 169, 0.3);
+        color: #2c3e50;
+      }
+
+      /* Enhanced Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.03);
+        border-radius: 10px;
+        margin: 2px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #5fb9a9, rgb(92, 157, 203));
+        border-radius: 10px;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(45deg, #4da697, rgb(82, 141, 182));
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
+      }
+
+      /* Optional: Scrollbar Corner */
+      ::-webkit-scrollbar-corner {
+        background: transparent;
+      }
+    </style>
+    <!-- user-select: none;  =>  To disallow copy-->
+    
+    <script type="module" src="/src/main.jsx"></script>
+    <!-- <script type="module" src="/mechat-frontend/src/main.jsx"></script> -->
+  </body>
+</html>
