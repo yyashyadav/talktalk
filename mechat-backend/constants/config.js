@@ -5,9 +5,9 @@ const corsOptions = {
   origin: [
     "http://localhost:5173",
     "http://localhost:4173",
-    // "https://talktalknow.vercel.app",
+    "https://talktalknow.vercel.app",
     process.env.CLIENT_URL,
-  ].filter(Boolean),
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };
