@@ -34,6 +34,7 @@ const newUser = TryCatch(async (req, res, next) => {
     avatar = {
       public_id: "default_avatar",
       url: "https://ui-avatars.com/api/?name=" + encodeURIComponent(name) + "&background=random",
+    
     };
   }
 
@@ -96,6 +97,7 @@ const getMyProfile = TryCatch(async (req, res, next) => {
 const logout = TryCatch(async (req, res) => {
   return res
     .status(200)
+    // Clear the cookie by setting maxAge to 0 overrides the existing cookie by ...cookieOptions
     .cookie("mechat-token", "", { ...cookieOptions, maxAge: 0 })
     .json({
       success: true,
@@ -284,6 +286,8 @@ export const updateProfile = async (req, res) => {
         if (user.avatar?.public_id) {
           await deletFilesFromCloudinary([user.avatar.public_id]);
         }
+        //now after uploading me make chnages to user
+        // Update user avatar with new file
         user.avatar = {
           public_id: result[0].public_id,
           url: result[0].url

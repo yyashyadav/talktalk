@@ -1,5 +1,6 @@
 import mongoose, { Schema, model, Types } from "mongoose";
 
+
 const schema = new Schema(
   {
     status: {
@@ -20,6 +21,8 @@ const schema = new Schema(
     },
   },
   {
+    // so we use timestamps to track when the request was created and updated
+  // and we use the status field to track the state of the request
     timestamps: true,
   }
 );

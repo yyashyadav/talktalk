@@ -14,7 +14,7 @@ const InitialLoader = ({ isLoading }) => {
         height: '100vh',
         width: '100vw',
         display: 'flex',
-        background: 'white',
+        bgcolor: theme.palette.background.default,
         position: 'fixed',
         top: 0,
         left: 0,
@@ -36,17 +36,17 @@ const InitialLoader = ({ isLoading }) => {
               md: "30%"
             },
             height: '100%',
-            background: '#f8f9fa',
-            borderRight: '1px solid #e9ecef',
+            bgcolor: theme.palette.primary.main,
+            borderRight: `1px solid ${theme.palette.primary.light}`,
             p: 2,
             transition: "width 0.3s ease",
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 , mb: 3 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
             <Box
               component="img"
               src={talktalkIcon}
-              alt="talktalk Logo"
+              alt="MeChat Logo"
               sx={{
                 width: 40,
                 height: 40,
@@ -56,9 +56,9 @@ const InitialLoader = ({ isLoading }) => {
             <Typography
               variant="h6"
               sx={{
-                fontFamily: 'monospace',
+                fontFamily: theme.typography.fontFamily,
                 fontWeight: 'bold',
-                color: '#212529',
+                color: theme.palette.text.primary,
               }}
             >
               TalkTalk
@@ -70,8 +70,8 @@ const InitialLoader = ({ isLoading }) => {
             variant="rectangular"
             height={40}
             sx={{
-              bgcolor: '#e9ecef',
-              borderRadius: 2,
+              bgcolor: theme.palette.primary.light,
+              borderRadius: theme.components.MuiPaper.styleOverrides.root.borderRadius,
               mb: 2,
               animation: 'pulse 1.5s ease-in-out infinite',
             }}
@@ -87,8 +87,8 @@ const InitialLoader = ({ isLoading }) => {
                   alignItems: 'center',
                   gap: 2,
                   p: 1,
-                  borderRadius: 2,
-                  background: '#ffffff',
+                  borderRadius: theme.components.MuiPaper.styleOverrides.root.borderRadius,
+                  background: theme.palette.background.paper,
                   animation: `fadeIn ${0.2 * i}s ease-out`,
                 }}
               >
@@ -96,20 +96,20 @@ const InitialLoader = ({ isLoading }) => {
                   variant="circular"
                   width={40}
                   height={40}
-                  sx={{ bgcolor: '#e9ecef', animation: 'pulse 1.5s ease-in-out infinite' }}
+                  sx={{ bgcolor: theme.palette.primary.light, animation: 'pulse 1.5s ease-in-out infinite' }}
                 />
                 <Box sx={{ flex: 1 }}>
                   <Skeleton
                     variant="text"
                     width="60%"
                     height={20}
-                    sx={{ bgcolor: '#e9ecef', animation: 'pulse 1.5s ease-in-out infinite' }}
+                    sx={{ bgcolor: theme.palette.primary.light, animation: 'pulse 1.5s ease-in-out infinite' }}
                   />
                   <Skeleton
                     variant="text"
                     width="40%"
                     height={16}
-                    sx={{ bgcolor: '#e9ecef', animation: 'pulse 1.5s ease-in-out infinite' }}
+                    sx={{ bgcolor: theme.palette.primary.light, animation: 'pulse 1.5s ease-in-out infinite' }}
                   />
                 </Box>
               </Box>
@@ -125,7 +125,7 @@ const InitialLoader = ({ isLoading }) => {
           p: isMobile ? 2 : 3, 
           display: 'flex', 
           flexDirection: 'column', 
-          background: '#ffffff', 
+          bgcolor: theme.palette.background.paper, 
           position: 'relative',
           ...(isMobile && {
             overflow: 'auto',
@@ -140,8 +140,8 @@ const InitialLoader = ({ isLoading }) => {
             gap: 2,
             mb: 3,
             p: 2,
-            background: '#f8f9fa',
-            borderRadius: 2,
+            bgcolor: theme.palette.primary.main,
+            borderRadius: theme.components.MuiPaper.styleOverrides.root.borderRadius,
             animation: 'fadeIn 0.5s ease-out',
             ...(isMobile && {
               gap: 1,
@@ -153,20 +153,20 @@ const InitialLoader = ({ isLoading }) => {
             variant="circular"
             width={isMobile ? 40 : 50}
             height={isMobile ? 40 : 50}
-            sx={{ bgcolor: '#e9ecef', animation: 'pulse 1.5s ease-in-out infinite' }}
+            sx={{ bgcolor: theme.palette.primary.light, animation: 'pulse 1.5s ease-in-out infinite' }}
           />
           <Box sx={{ flex: 1 }}>
             <Skeleton
               variant="text"
               width={isMobile ? "40%" : "30%"}
               height={24}
-              sx={{ bgcolor: '#e9ecef', animation: 'pulse 1.5s ease-in-out infinite' }}
+              sx={{ bgcolor: theme.palette.primary.light, animation: 'pulse 1.5s ease-in-out infinite' }}
             />
             <Skeleton
               variant="text"
               width={isMobile ? "30%" : "20%"}
               height={16}
-              sx={{ bgcolor: '#e9ecef', animation: 'pulse 1.5s ease-in-out infinite' }}
+              sx={{ bgcolor: theme.palette.primary.light, animation: 'pulse 1.5s ease-in-out infinite' }}
             />
           </Box>
         </Box>
@@ -199,20 +199,20 @@ const InitialLoader = ({ isLoading }) => {
                 variant="circular"
                 width={isMobile ? 30 : 35}
                 height={isMobile ? 30 : 35}
-                sx={{ bgcolor: '#e9ecef', animation: 'pulse 1.5s ease-in-out infinite' }}
+                sx={{ bgcolor: theme.palette.primary.light, animation: 'pulse 1.5s ease-in-out infinite' }}
               />
               <Box
                 sx={{
-                  background: i % 2 === 0 ? '#f8f9fa' : '#e9ecef',
+                  bgcolor: i % 2 === 0 ? theme.palette.primary.main : theme.palette.secondary.main,
                   p: isMobile ? 1.5 : 2,
-                  borderRadius: 2,
+                  borderRadius: theme.components.MuiPaper.styleOverrides.root.borderRadius,
                 }}
               >
                 <Skeleton
                   variant="text"
                   width={Math.random() * 100 + 100}
                   height={20}
-                  sx={{ bgcolor: '#e9ecef', animation: 'pulse 1.5s ease-in-out infinite' }}
+                  sx={{ bgcolor: theme.palette.primary.light, animation: 'pulse 1.5s ease-in-out infinite' }}
                 />
               </Box>
             </Box>
@@ -224,33 +224,18 @@ const InitialLoader = ({ isLoading }) => {
           sx={{
             mt: 3,
             p: isMobile ? 1.5 : 2,
-            background: '#f8f9fa',
-            borderRadius: 2,
+            bgcolor: theme.palette.primary.main,
+            borderRadius: theme.components.MuiPaper.styleOverrides.root.borderRadius,
             animation: 'fadeIn 1s ease-out',
           }}
         >
           <Skeleton
             variant="rectangular"
             height={isMobile ? 36 : 40}
-            sx={{ bgcolor: '#e9ecef', borderRadius: 2, animation: 'pulse 1.5s ease-in-out infinite' }}
+            sx={{ bgcolor: theme.palette.primary.light, borderRadius: theme.components.MuiPaper.styleOverrides.root.borderRadius, animation: 'pulse 1.5s ease-in-out infinite' }}
           />
         </Box>
       </Box>
-
-      <style>
-        {`
-          @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
-          }
-
-          @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-        `}
-      </style>
     </Box>
   );
 };

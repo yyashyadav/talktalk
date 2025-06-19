@@ -17,7 +17,7 @@ const validRoutes = [
   '/admin/messages'
 ];
 
-const Logo = ({ size = 48, isHeader = false }) => {
+const Logo = ({ size = 48, isHeader = false, onClick }) => {
   const location = useLocation();
   
   // Check if current path matches any valid route
@@ -82,8 +82,12 @@ const Logo = ({ size = 48, isHeader = false }) => {
           height: animationValues.shadowHeight,
           background: `radial-gradient(ellipse at center, rgba(0,0,0,${animationValues.shadowOpacity}) 0%, rgba(0,0,0,0) 70%)`,
           animation: `shadow ${animationValues.duration} ease-in-out infinite`,
-        }
+        },
+        cursor: onClick ? 'pointer' : 'default',
+        transition: 'transform 0.2s',
+        '&:hover': onClick ? { transform: 'scale(1.07)' } : {},
       }}
+      onClick={onClick}
     >
       <img 
         src={iconSrc}

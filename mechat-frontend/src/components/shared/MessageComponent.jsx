@@ -1,6 +1,6 @@
 import { Box, Stack, Typography, IconButton, Avatar, Menu, MenuItem } from "@mui/material";
 import React, { memo, useState, useMemo, useRef, useEffect } from "react";
-import { grayColor, lightBlue, orange, myblue, chatBgPattern } from "../../constants/color";
+import { grayColor, lightBlue, orange, myblue, chatBgPattern, messageSentBg, messageReceivedBg } from "../../constants/color";
 import moment from "moment";
 import { fileFormat, transformImage } from "../../lib/features";
 import RenderAttachment from "./RenderAttachment";
@@ -87,7 +87,7 @@ const MessageComponent = ({
           <Box
             key={`${reaction.user._id}-${reaction.emoji}-${index}`}
             sx={{
-              backgroundColor: isMe ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)',
+              backgroundColor: isMe ? 'rgba(240, 244, 248, 0.2)' : 'rgba(0,0,0,0.2)',
               borderRadius: '12px',
               padding: '2px 6px',
               fontSize: '0.8rem',
@@ -97,7 +97,7 @@ const MessageComponent = ({
             }}
           >
             <span>{reaction.emoji}</span>
-            <Typography variant="caption" sx={{ opacity: 0.7 }}>
+            <Typography variant="caption" sx={{ opacity: 0.7, color: '#f0f4f8' }}>
               {reaction.user.name}
             </Typography>
           </Box>
@@ -149,7 +149,7 @@ const MessageComponent = ({
       >
         <Box
           sx={{
-            backgroundColor: "rgba(0,0,0,0.1)",
+            backgroundColor: "rgba(240, 244, 248, 0.1)",
             padding: "0.5rem 1rem",
             borderRadius: "1rem",
             maxWidth: "70%",
@@ -158,7 +158,7 @@ const MessageComponent = ({
           <Typography
             variant="body2"
             sx={{
-              color: "text.secondary",
+              color: "rgba(240, 244, 248, 0.8)",
               textAlign: "center",
             }}
           >
@@ -183,8 +183,8 @@ const MessageComponent = ({
     >
       <Box
         sx={{
-          backgroundColor: isMe ? "#424242" : "#2C2C2C",
-          color: "#FFFFFF",
+          backgroundColor: isMe ? messageSentBg : messageReceivedBg,
+          color: "#f0f4f8",
           borderRadius: "12px",
           padding: "0.5rem 1rem",
           position: "relative",
@@ -195,128 +195,136 @@ const MessageComponent = ({
         }}
       >
         {!isMe && (
-          <Typography color="#757575" fontWeight={"600"} variant="caption">
+          <Typography color="rgba(240, 244, 248, 0.8)" fontWeight={"600"} variant="caption">
             {sender.name}
           </Typography>
         )}
 
+        {/* Message content */}
         {content && (
-          <Typography sx={{ 
-            wordBreak: "break-word",
-            color: "#FFFFFF"
-          }}>
+          <Typography
+            variant="body2"
+            sx={{
+              color: "#f0f4f8",
+              wordBreak: "break-word",
+              lineHeight: 1.4,
+              mb: attachments.length > 0 ? 1 : 0
+            }}
+          >
             {highlightSearchText(content, window.searchQuery)}
           </Typography>
         )}
 
+        {/* Attachments */}
         {attachments.length > 0 && (
           <Stack spacing={1} mt={1}>
-            {attachments.map((attachment, index) => {
-              const url = attachment.url;
-              const file = fileFormat(url);
-
-              return (
-                <Box key={index}>
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download
-                    style={{
-                      color: isMe ? "white" : "black",
-                    }}
-                  >
-                    {RenderAttachment(file, url)}
-                  </a>
-                </Box>
-              );
-            })}
+            {attachments.map((attachment, index) => (
+              <RenderAttachment
+                key={index}
+                attachment={attachment}
+                isMe={isMe}
+              />
+            ))}
           </Stack>
         )}
 
-        {isVoiceMessage && (
-          <Box
-            sx={{
-              bgcolor: isMe ? "primary.main" : "background.paper",
-              color: isMe ? "white" : "text.primary",
-              padding: "0.5rem 1rem",
-              borderRadius: "1rem",
-              maxWidth: "70%",
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-              cursor: "pointer",
-              '&:hover': {
-                opacity: 0.9
-              }
-            }}
-            onClick={handlePlayPause}
-          >
+        {/* Voice message */}
+        {isVoiceMessage && audio && (
+          <Box sx={{ mt: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
             <IconButton
+              onClick={handlePlayPause}
               sx={{
-                color: isMe ? "white" : "primary.main",
-                padding: "0.5rem",
+                color: '#f0f4f8',
+                backgroundColor: 'rgba(240, 244, 248, 0.1)',
                 '&:hover': {
-                  backgroundColor: 'rgba(255,255,255,0.1)'
+                  backgroundColor: 'rgba(240, 244, 248, 0.2)',
                 }
               }}
             >
               {isPlaying ? <PauseIcon /> : <PlayIcon />}
             </IconButton>
-            <Typography variant="body2">
-              {audio?.duration ? `${Math.floor(audio.duration / 60)}:${(audio.duration % 60).toString().padStart(2, '0')}` : '0:00'}
+            <audio ref={audioRef} src={audio} />
+            <Typography variant="caption" sx={{ color: 'rgba(240, 244, 248, 0.7)' }}>
+              Voice message
             </Typography>
-            <audio
-              ref={audioRef}
-              src={audio?.url}
-              style={{ display: 'none' }}
-            />
           </Box>
         )}
 
+        {/* Reactions */}
         {renderReactions}
 
-        {/* Message info */}
-        <Stack
-          direction="row"
-          spacing={1}
-          alignItems="center"
-          justifyContent="flex-end"
+        {/* Message actions */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "0.25rem",
+            right: "0.25rem",
+            opacity: 0,
+            transition: "opacity 0.2s ease",
+            "&:hover": {
+              opacity: 1,
+            },
+          }}
         >
-          <Typography 
-            variant="caption" 
-            sx={{ 
-              color: isMe ? "rgba(255,255,255,0.7)" : "text.secondary",
-              fontSize: "0.7rem"
-            }}
-          >
-            {formatMessageTime(createdAt)}
-          </Typography>
-          
           <IconButton
             size="small"
             onClick={handleClick}
-            sx={{ 
-              padding: 0.2,
-              color: isMe ? "rgba(255,255,255,0.7)" : "text.secondary"
+            sx={{
+              color: "rgba(240, 244, 248, 0.7)",
+              backgroundColor: "rgba(0, 0, 0, 0.1)",
+              "&:hover": {
+                backgroundColor: "rgba(0, 0, 0, 0.2)",
+                color: "#f0f4f8",
+              },
             }}
           >
             <MoreVert fontSize="small" />
           </IconButton>
-        </Stack>
+        </Box>
+
+        {/* Timestamp */}
+        <Typography
+          variant="caption"
+          sx={{
+            color: "rgba(240, 244, 248, 0.5)",
+            fontSize: "0.7rem",
+            display: "block",
+            textAlign: isMe ? "right" : "left",
+            mt: 0.5,
+          }}
+        >
+          {formatMessageTime(createdAt)}
+        </Typography>
       </Box>
 
-      <MessageActionsMenu
+      {/* Message actions menu */}
+      <Menu
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        message={message}
-        onReply={onReply}
-        onForward={onForward}
-        onDelete={onDelete}
-        onReact={onReact}
-        isOwnMessage={isMe}
-      />
+        sx={{
+          "& .MuiPaper-root": {
+            backgroundColor: "#1e2a35",
+            color: "#f0f4f8",
+            border: "1px solid rgba(240, 244, 248, 0.1)",
+          },
+        }}
+      >
+        <MenuItem onClick={() => { onReply(message); handleClose(); }}>
+          <Reply sx={{ mr: 1, fontSize: "1rem" }} />
+          Reply
+        </MenuItem>
+        <MenuItem onClick={() => { onForward(message); handleClose(); }}>
+          <Forward sx={{ mr: 1, fontSize: "1rem" }} />
+          Forward
+        </MenuItem>
+        {isMe && (
+          <MenuItem onClick={() => { onDelete(message); handleClose(); }}>
+            <Delete sx={{ mr: 1, fontSize: "1rem" }} />
+            Delete
+          </MenuItem>
+        )}
+      </Menu>
     </motion.div>
   );
 };

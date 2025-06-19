@@ -3,7 +3,7 @@ import { Link } from "../styles/StyledComponents";
 import { Box, Stack, Typography } from "@mui/material";
 import AvatarCard from "./AvatarCard";
 import { motion } from "framer-motion";
-import { mychatlistcolor } from "../../constants/color";
+import { mychatlistcolor, sidebarBg } from "../../constants/color";
 import { useDispatch } from "react-redux";
 import { setIsMobile } from "../../redux/reducers/misc";
 
@@ -54,9 +54,9 @@ const ChatItem = ({
         width: "100%",
         transition: "all 0.2s ease",
         "&:hover": {
-          backgroundColor: sameSender ? "transparent" : "rgba(95, 185, 169, 0.08)",
+          backgroundColor: sameSender ? "transparent" : "rgba(58, 96, 115, 0.2)",
           transform: sameSender ? "none" : "translateX(4px)",
-          boxShadow: sameSender ? "none" : "inset 4px 0 0 0 rgba(95, 185, 169, 0.6)",
+          boxShadow: sameSender ? "none" : "inset 4px 0 0 0 rgba(58, 96, 115, 0.6)",
         }
       }}
       to={`/chat/${_id}`}
@@ -68,14 +68,17 @@ const ChatItem = ({
           display: "flex",
           gap: "1rem",
           alignItems: "center",
-          backgroundColor: sameSender ? mychatlistcolor : "unset",
+          backgroundColor: sameSender ? mychatlistcolor : "transparent",
           backgroundImage: sameSender ? mychatlistcolor : "unset",
-          color: sameSender ? "white" : "unset",
+          color: sameSender ? "#f0f4f8" : "#f0f4f8",
           position: "relative",
           padding: "1rem",
-          // transition: "all 0.3s ease",
           width: "100%",
-          boxSizing: "border-box"
+          boxSizing: "border-box",
+          borderBottom: "1px solid rgba(240, 244, 248, 0.1)",
+          "&:last-child": {
+            borderBottom: "none"
+          }
         }}
       >
         <Box sx={{ 
@@ -98,8 +101,7 @@ const ChatItem = ({
           <Typography
             sx={{
               fontWeight: 500,
-              color: sameSender ? "white" : "inherit",
-              // transition: "color 0.3s ease",
+              color: sameSender ? "#f0f4f8" : "#f0f4f8",
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
@@ -121,11 +123,10 @@ const ChatItem = ({
               variant="caption"
               sx={{
                 color: sameSender 
-                  ? "rgba(255, 255, 255, 0.7)" 
-                  : "text.secondary",
+                  ? "rgba(240, 244, 248, 0.7)" 
+                  : "rgba(240, 244, 248, 0.6)",
                 fontSize: "0.75rem",
                 lineHeight: 1.2,
-                // transition: "color 0.3s ease"
               }}
             >
               {getStatusText()}
@@ -136,8 +137,8 @@ const ChatItem = ({
                 sx={{
                   ...onlineDotStyles,
                   boxShadow: sameSender 
-                    ? "0 0 0 2px rgba(255, 255, 255, 0.8)"
-                    : "0 0 0 2px #fff",
+                    ? "0 0 0 2px rgba(240, 244, 248, 0.8)"
+                    : "0 0 0 2px #16222a",
                   transition: "box-shadow 0.3s ease"
                 }}
               />
@@ -147,14 +148,13 @@ const ChatItem = ({
           {newMessageAlert && (
             <Typography
               sx={{
-                color: sameSender ? "rgba(255, 255, 255, 0.9)" : "primary.main",
+                color: sameSender ? "rgba(240, 244, 248, 0.9)" : "#3a6073",
                 fontSize: "0.8rem",
                 fontWeight: 500,
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 whiteSpace: "nowrap",
                 mt: "2px",
-                // transition: "color 0.3s ease"
               }}
             >
               {newMessageAlert.count}{" "}

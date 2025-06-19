@@ -31,7 +31,7 @@ import {
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { transformImage } from '../../lib/features';
-import { myblue } from '../../constants/color';
+import { myblue, headerBg } from '../../constants/color';
 import GroupInfoDialog from '../dialogs/GroupInfoDialog';
 import { useSelector, useDispatch } from 'react-redux';
 import { setIsMobile } from '../../redux/reducers/misc';
@@ -90,17 +90,22 @@ const ChatHeader = ({ chat, user, onlineUsers = [], handleDeleteChat, openBackgr
       <AppBar 
         position="static" 
         sx={{ 
-          background: myblue,
-          boxShadow: 1,
-          borderBottom: 1,
-          borderColor: 'divider',
+          background: headerBg,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+          borderBottom: "1px solid rgba(240, 244, 248, 0.1)",
         }}
       >
         <Toolbar>
           <IconButton 
             edge="start" 
-            color="inherit"
-            sx={{ display: { sm: 'none' }, mr: 1 }}
+            sx={{ 
+              display: { sm: 'none' }, 
+              mr: 1,
+              color: "#f0f4f8",
+              "&:hover": {
+                backgroundColor: "rgba(240, 244, 248, 0.1)",
+              },
+            }}
             onClick={handleBack}
           >
             <ArrowBackIcon />
@@ -115,7 +120,13 @@ const ChatHeader = ({ chat, user, onlineUsers = [], handleDeleteChat, openBackgr
             <Avatar
               src={transformImage(Array.isArray(chat?.avatar) ? chat.avatar[0] : '')}
               alt={chat?.name}
-              sx={{ width: 40, height: 40, cursor: chat?.groupChat && isAdmin ? 'pointer' : 'default', flexShrink: 0 }}
+              sx={{ 
+                width: 40, 
+                height: 40, 
+                cursor: chat?.groupChat && isAdmin ? 'pointer' : 'default', 
+                flexShrink: 0,
+                border: "2px solid rgba(240, 244, 248, 0.2)",
+              }}
               onClick={() => {
                 if (chat?.groupChat && isAdmin) {
                   handleGroupInfo();
@@ -127,9 +138,9 @@ const ChatHeader = ({ chat, user, onlineUsers = [], handleDeleteChat, openBackgr
               <Stack direction="row" alignItems="center" spacing={1}>
                 <Typography 
                   variant="subtitle1" 
-                  color="white" 
-                  fontWeight={600}
-                  sx={{
+                  sx={{ 
+                    color: "#f0f4f8",
+                    fontWeight: 600,
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',
@@ -139,12 +150,27 @@ const ChatHeader = ({ chat, user, onlineUsers = [], handleDeleteChat, openBackgr
                   {chat?.name || 'Chat'}
                 </Typography>
                 {chat?.groupChat && isAdmin && (
-                  <IconButton size="small" color="inherit" onClick={handleGroupInfo} sx={{ flexShrink: 0 }}>
+                  <IconButton 
+                    size="small" 
+                    sx={{ 
+                      flexShrink: 0,
+                      color: "#f0f4f8",
+                      "&:hover": {
+                        backgroundColor: "rgba(240, 244, 248, 0.1)",
+                      },
+                    }} 
+                    onClick={handleGroupInfo}
+                  >
                     <EditIcon fontSize="small" />
                   </IconButton>
                 )}
               </Stack>
-              <Typography variant="caption" color="rgba(255, 255, 255, 0.8)">
+              <Typography 
+                variant="caption" 
+                sx={{ 
+                  color: "rgba(240, 244, 248, 0.7)",
+                }}
+              >
                 {chat?.groupChat 
                   ? `${chat?.members?.length} members`
                   : isOnline ? 'online' : 'offline'
@@ -154,26 +180,58 @@ const ChatHeader = ({ chat, user, onlineUsers = [], handleDeleteChat, openBackgr
           </Stack>
 
           {chat?.groupChat && (
-            <IconButton onClick={handleGroupInfo} color="inherit" sx={{ flexShrink: 0 }}>
+            <IconButton 
+              onClick={handleGroupInfo} 
+              sx={{ 
+                flexShrink: 0,
+                color: "#f0f4f8",
+                "&:hover": {
+                  backgroundColor: "rgba(240, 244, 248, 0.1)",
+                },
+              }}
+            >
               <InfoIcon />
             </IconButton>
           )}
 
           <Stack direction="row" spacing={1} sx={{ flexShrink: 0 }}>
             <Tooltip title="Voice Call">
-              <IconButton color="inherit">
+              <IconButton 
+                sx={{
+                  color: "#f0f4f8",
+                  "&:hover": {
+                    backgroundColor: "rgba(240, 244, 248, 0.1)",
+                  },
+                }}
+              >
                 <CallIcon />
               </IconButton>
             </Tooltip>
             
             <Tooltip title="Search">
-              <IconButton color="inherit" onClick={handleSearchToggle}>
+              <IconButton 
+                onClick={handleSearchToggle}
+                sx={{
+                  color: "#f0f4f8",
+                  "&:hover": {
+                    backgroundColor: "rgba(240, 244, 248, 0.1)",
+                  },
+                }}
+              >
                 <SearchIcon />
               </IconButton>
             </Tooltip>
             
             <Tooltip title="More">
-              <IconButton color="inherit" onClick={handleMenuOpen}>
+              <IconButton 
+                onClick={handleMenuOpen}
+                sx={{
+                  color: "#f0f4f8",
+                  "&:hover": {
+                    backgroundColor: "rgba(240, 244, 248, 0.1)",
+                  },
+                }}
+              >
                 <MoreVertIcon />
               </IconButton>
             </Tooltip>
@@ -191,6 +249,14 @@ const ChatHeader = ({ chat, user, onlineUsers = [], handleDeleteChat, openBackgr
               vertical: 'top',
               horizontal: 'right',
             }}
+            sx={{
+              "& .MuiPaper-root": {
+                backgroundColor: "#1e2a35",
+                color: "#f0f4f8",
+                border: "1px solid rgba(240, 244, 248, 0.1)",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+              },
+            }}
           >
             {chat?.groupChat && isAdmin && (
               <MenuItem onClick={() => {
@@ -198,126 +264,93 @@ const ChatHeader = ({ chat, user, onlineUsers = [], handleDeleteChat, openBackgr
                 handleMenuClose();
               }}>
                 <ListItemIcon>
-                  <PersonAddIcon fontSize="small" />
+                  <EditIcon sx={{ color: "#f0f4f8" }} />
                 </ListItemIcon>
-                Add Members
+                Edit Group
               </MenuItem>
             )}
-            <MenuItem onClick={openBackground}>
+
+            <MenuItem onClick={() => {
+              openBackground();
+              handleMenuClose();
+            }}>
               <ListItemIcon>
-                <WallpaperIcon fontSize="small" />
+                <WallpaperIcon sx={{ color: "#f0f4f8" }} />
               </ListItemIcon>
               Change Background
             </MenuItem>
-            
-            <MenuItem onClick={handleMenuClose}>
+
+            {chat?.groupChat && (
+              <MenuItem onClick={() => {
+                handleGroupInfo();
+                handleMenuClose();
+              }}>
+                <ListItemIcon>
+                  <InfoIcon sx={{ color: "#f0f4f8" }} />
+                </ListItemIcon>
+                Group Info
+              </MenuItem>
+            )}
+
+            <MenuItem onClick={handleDelete}>
               <ListItemIcon>
-                <BlockIcon fontSize="small" />
+                <DeleteIcon sx={{ color: "#ea7070" }} />
               </ListItemIcon>
-              Block User
-            </MenuItem>
-            
-            <MenuItem onClick={handleMenuClose}>
-              <ListItemIcon>
-                <ReportIcon fontSize="small" />
-              </ListItemIcon>
-              Report
-            </MenuItem>
-            
-            <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
-              <ListItemIcon>
-                <DeleteIcon fontSize="small" color="error" />
-              </ListItemIcon>
-              Delete Chat
+              <Typography sx={{ color: "#ea7070" }}>
+                Delete Chat
+              </Typography>
             </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
 
+      {/* Search Bar */}
       {isSearchVisible && (
         <Box
           sx={{
-            position: 'absolute',
-            top: '54px', // Adjusted for better positioning
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '90%',
-            maxWidth: '600px',
-            p: 1.5,
-            bgcolor: 'background.paper',
-            borderRadius: 2,
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 1.5,
-            zIndex: 1000,
-            animation: 'slideDown 0.2s ease-out',
-            '@keyframes slideDown': {
-              from: {
-                opacity: 0,
-                transform: 'translate(-50%, -10px)'
-              },
-              to: {
-                opacity: 1,
-                transform: 'translate(-50%, 0)'
-              }
-            }
+            p: 2,
+            backgroundColor: "#1e2a35",
+            borderBottom: "1px solid rgba(240, 244, 248, 0.1)",
           }}
         >
-          <SearchIcon sx={{ color: 'text.secondary', ml: 1 }} />
-          <InputBase
-            autoFocus
-            fullWidth
-            placeholder="Search messages..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-            sx={{
-              '& .MuiInputBase-input': {
-                p: '8px 0',
-                fontSize: '1rem',
-                transition: 'all 0.2s',
-                '&:focus': {
-                  outline: 'none'
-                }
-              }
-            }}
-          />
-          {searchQuery && (
-            <IconButton 
-              size="small" 
-              onClick={() => {
-                setSearchQuery('');
-                window.searchMessages?.('');
+          <Stack direction="row" spacing={1} alignItems="center">
+            <SearchIcon sx={{ color: "rgba(240, 244, 248, 0.7)" }} />
+            <InputBase
+              placeholder="Search messages..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+              sx={{
+                flex: 1,
+                color: "#f0f4f8",
+                "& .MuiInputBase-input": {
+                  color: "#f0f4f8",
+                  "&::placeholder": {
+                    color: "rgba(240, 244, 248, 0.6)",
+                    opacity: 1,
+                  },
+                },
               }}
-              sx={{ 
-                mr: 1,
-                '&:hover': {
-                  bgcolor: 'action.hover'
-                }
+            />
+            <IconButton
+              onClick={handleSearchToggle}
+              sx={{
+                color: "rgba(240, 244, 248, 0.7)",
+                "&:hover": {
+                  backgroundColor: "rgba(240, 244, 248, 0.1)",
+                },
               }}
             >
-              <CloseIcon fontSize="small" />
+              <CloseIcon />
             </IconButton>
-          )}
-          <IconButton 
-            size="small" 
-            onClick={handleSearchToggle}
-            sx={{
-              bgcolor: 'action.hover',
-              '&:hover': {
-                bgcolor: 'action.selected'
-              }
-            }}
-          >
-            <CloseIcon fontSize="small" />
-          </IconButton>
+          </Stack>
         </Box>
       )}
 
       <GroupInfoDialog
         open={isGroupInfoOpen}
         onClose={() => setIsGroupInfoOpen(false)}
-        chatId={chat?._id}
+        chat={chat}
+        user={user}
       />
     </>
   );

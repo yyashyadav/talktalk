@@ -52,7 +52,8 @@ const schema = new Schema(
     timestamps: true,
   }
 );
-
+// this uses bcrypt to hash the password before saving it to the database 
+// it optimizes that when the password is not modified, it does not hash it again
 schema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 

@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
 import store from "./redux/store.js";
+import { theme } from "./theme";
+import { globalStyles } from "./theme/globalStyles.jsx";
 
 // Register Service Worker
 if ('serviceWorker' in navigator) {
@@ -37,7 +39,7 @@ const preloadAssets = () => {
 
   // Preload critical fonts
   const criticalFonts = [
-    'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap',
+    'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap',
   ];
   
   criticalFonts.forEach(href => {
@@ -83,10 +85,13 @@ root.render(
     <ErrorBoundary>
       <Provider store={store}>
         <HelmetProvider>
-          <CssBaseline />
-          <div onContextMenu={(e) => e.preventDefault()}>
-            <App />
-          </div>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {globalStyles}
+            <div onContextMenu={(e) => e.preventDefault()}>
+              <App />
+            </div>
+          </ThemeProvider>
         </HelmetProvider>
       </Provider>
     </ErrorBoundary>
