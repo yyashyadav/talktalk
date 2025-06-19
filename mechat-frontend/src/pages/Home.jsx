@@ -43,8 +43,8 @@ const Home = () => {
     <Box
       sx={{
         minHeight: "100%",
-        background: "linear-gradient(to top, #6a85b6 0%, #bac8e0 100%)",
-        color: "#ffffff",
+        background: "linear-gradient(to right, #16222a, #3a6073)",
+        color: "#f0f4f8",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -58,7 +58,7 @@ const Home = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: "radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px)",
+          background: "radial-gradient(circle, rgba(240, 244, 248, 0.05) 1px, transparent 1px)",
           backgroundSize: "30px 30px",
           opacity: 0.4,
         },
@@ -69,7 +69,7 @@ const Home = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: "linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1) 75%, transparent 75%, transparent)",
+          background: "linear-gradient(45deg, rgba(240, 244, 248, 0.05) 25%, transparent 25%, transparent 50%, rgba(240, 244, 248, 0.05) 50%, rgba(240, 244, 248, 0.05) 75%, transparent 75%, transparent)",
           backgroundSize: "60px 60px",
           opacity: 0.2,
           animation: "sparkle 3s linear infinite",
@@ -78,7 +78,7 @@ const Home = () => {
     >
       {/* Main Content */}
       <Container maxWidth="md" sx={{ zIndex: 1 }}>
-        <Box sx={{ textAlign: "center", color: "white", marginBottom: 4 }}>
+        <Box sx={{ textAlign: "center", color: "#f0f4f8", marginBottom: 4 }}>
           <Typography
             component="div"
             sx={{
@@ -86,31 +86,11 @@ const Home = () => {
               letterSpacing: "1px",
             }}
             >
-            {/* <Typography
-              component="h1"
-              sx={{
-                color: "black",
-                // fontWeight: "bold",
-                fontFamily: "cursive",
-                // fontFamily: "'Inter', 'Segoe UI', sans-serif",
-                // fontSize: "48px",
-                fontSize: { xs: "36px", md: "48px" },
-                letterSpacing: "1px",
-                textAlign: "center",
-                marginBottom: "10px",
-                animation: "fadeIn 2s ease-in-out",
-                fontWeight: 300,
-              }}
-            >
-              Welcome to 
-            </Typography>
-             */}
             
            <Typography
               component="h1"
               sx={{
-                // color: "#2c3e50",
-                color: "#000000",
+                color: "#f0f4f8",
                 fontFamily: "'Inter', 'Segoe UI', sans-serif",
                 fontSize: { xs: "36px", md: "48px" },
                 letterSpacing: "1px",
@@ -129,7 +109,7 @@ const Home = () => {
                 fontWeight: "bold",
                 fontSize: { xs: "48px", md: "60px" },
                 letterSpacing: "1px",
-                background: "linear-gradient(135deg, #000000, #1a1a1a, #2d2d2d)",
+                background: "linear-gradient(135deg, #16222a, #3a6073)",
                 padding: "10px 35px",
                 width: "fit-content",
                 display: "inline-block",
@@ -148,7 +128,7 @@ const Home = () => {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  background: "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)",
+                  background: "radial-gradient(circle, rgba(240, 244, 248, 0.1) 1px, transparent 1px)",
                   backgroundSize: "20px 20px",
                   opacity: 0.3,
                 },
@@ -159,7 +139,7 @@ const Home = () => {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  background: "linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.1) 75%, transparent 75%, transparent)",
+                  background: "linear-gradient(45deg, rgba(240, 244, 248, 0.1) 25%, transparent 25%, transparent 50%, rgba(240, 244, 248, 0.1) 50%, rgba(240, 244, 248, 0.1) 75%, transparent 75%, transparent)",
                   backgroundSize: "40px 40px",
                   opacity: 0.2,
                   animation: "sparkle 3s linear infinite",
@@ -176,7 +156,7 @@ const Home = () => {
               <span style={{ 
                 position: "relative", 
                 zIndex: 1,
-                background: "linear-gradient(135deg, #ffffff, #e0e0e0)",
+                background: "linear-gradient(135deg, #f0f4f8, #e0e8f0)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 textShadow: "0 2px 4px rgba(0,0,0,0.1)"
@@ -189,7 +169,7 @@ const Home = () => {
             component="h3"
             sx={{
               marginTop: 2,
-              color: "#2c3e50",
+              color: "rgba(240, 244, 248, 0.8)",
               animation: "fadeIn 2s ease-in-out", 
               fontSize: "21px",
               position: "relative",
@@ -198,51 +178,202 @@ const Home = () => {
               "&::after": {
                 content: '""',
                 position: "absolute",
-                bottom: "-4px",
-                left: "0",
-                width: "100%",
-                height: "8px",
-                background: `url("data:image/svg+xml,%3Csvg width='100%25' height='8' viewBox='0 0 100 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,4 C20,0 40,8 60,4 C80,0 100,8 100,4' stroke='%232c3e50' stroke-width='2' fill='none'/%3E%3C/svg%3E")`,
-                backgroundSize: "100% 100%",
-                backgroundRepeat: "no-repeat",
-                opacity: 0.9,
+                bottom: "-10px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "60px",
+                height: "2px",
+                background: "linear-gradient(90deg, transparent, #3a6073, transparent)",
+                animation: "fadeIn 2s ease-in-out 0.5s both"
               }
             }}
           >
-            Connect, Chat, and Share   
+            Connect, Chat, and Share with Friends
           </Typography>
-          
-          {/* Start Chat Button - Only visible on mobile */}
-          {isMobile && (
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                startIcon={<ChatIcon />}
-                onClick={handleStartChat}
-                sx={{
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: 3,
-                  fontWeight: "bold",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-                  animation: "fadeIn 2s ease-in-out",
-                  "&:hover": {
-                    transform: "scale(1.05)",
-                    boxShadow: "0 6px 16px rgba(0,0,0,0.4)",
-                  },
-                  transition: "all 0.3s ease",
-                }}
-              >
-                Start Chat
-              </Button>
-            </Box>
-          )}
+        </Box>
+
+        {/* Feature Cards */}
+        <Grid container spacing={3} sx={{ marginBottom: 4 }}>
+          <Grid item xs={12} md={4}>
+            <Card
+              sx={{
+                background: "rgba(22, 34, 42, 0.8)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(240, 244, 248, 0.1)",
+                borderRadius: "16px",
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  transform: "translateY(-8px)",
+                  boxShadow: "0 12px 30px rgba(0, 0, 0, 0.3)",
+                  border: "1px solid rgba(58, 96, 115, 0.3)",
+                },
+              }}
+            >
+              <CardContent sx={{ textAlign: "center", p: 3 }}>
+                <Avatar
+                  sx={{
+                    width: 60,
+                    height: 60,
+                    margin: "0 auto 16px",
+                    background: "linear-gradient(135deg, #3a6073, #2a4a5a)",
+                    color: "#f0f4f8",
+                  }}
+                >
+                  <ChatIcon />
+                </Avatar>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: "#f0f4f8",
+                    marginBottom: 1,
+                    fontWeight: 600,
+                  }}
+                >
+                  Real-time Chat
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "rgba(240, 244, 248, 0.7)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Experience instant messaging with real-time updates and notifications.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <Card
+              sx={{
+                background: "rgba(22, 34, 42, 0.8)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(240, 244, 248, 0.1)",
+                borderRadius: "16px",
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  transform: "translateY(-8px)",
+                  boxShadow: "0 12px 30px rgba(0, 0, 0, 0.3)",
+                  border: "1px solid rgba(58, 96, 115, 0.3)",
+                },
+              }}
+            >
+              <CardContent sx={{ textAlign: "center", p: 3 }}>
+                <Avatar
+                  sx={{
+                    width: 60,
+                    height: 60,
+                    margin: "0 auto 16px",
+                    background: "linear-gradient(135deg, #3a6073, #2a4a5a)",
+                    color: "#f0f4f8",
+                  }}
+                >
+                  <ChatIcon />
+                </Avatar>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: "#f0f4f8",
+                    marginBottom: 1,
+                    fontWeight: 600,
+                  }}
+                >
+                  Group Conversations
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "rgba(240, 244, 248, 0.7)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Create and manage group chats with multiple participants.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <Card
+              sx={{
+                background: "rgba(22, 34, 42, 0.8)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(240, 244, 248, 0.1)",
+                borderRadius: "16px",
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  transform: "translateY(-8px)",
+                  boxShadow: "0 12px 30px rgba(0, 0, 0, 0.3)",
+                  border: "1px solid rgba(58, 96, 115, 0.3)",
+                },
+              }}
+            >
+              <CardContent sx={{ textAlign: "center", p: 3 }}>
+                <Avatar
+                  sx={{
+                    width: 60,
+                    height: 60,
+                    margin: "0 auto 16px",
+                    background: "linear-gradient(135deg, #3a6073, #2a4a5a)",
+                    color: "#f0f4f8",
+                  }}
+                >
+                  <ChatIcon />
+                </Avatar>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: "#f0f4f8",
+                    marginBottom: 1,
+                    fontWeight: 600,
+                  }}
+                >
+                  File Sharing
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "rgba(240, 244, 248, 0.7)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Share files, images, and documents seamlessly with your contacts.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+
+        {/* CTA Button */}
+        <Box sx={{ textAlign: "center" }}>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={handleStartChat}
+            sx={{
+              background: "linear-gradient(135deg, #3a6073, #2a4a5a)",
+              color: "#f0f4f8",
+              padding: "12px 32px",
+              fontSize: "18px",
+              fontWeight: 600,
+              borderRadius: "25px",
+              textTransform: "none",
+              boxShadow: "0 4px 15px rgba(58, 96, 115, 0.3)",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                background: "linear-gradient(135deg, #4a7083, #3a6073)",
+                transform: "translateY(-2px)",
+                boxShadow: "0 6px 20px rgba(58, 96, 115, 0.4)",
+              },
+            }}
+          >
+            Start Chatting Now
+          </Button>
         </Box>
       </Container>
 
-      {/* Floating Action Button - Only visible on mobile */}
+      {/* Floating Action Button for Mobile */}
       {isMobile && (
         <Fab
           color="primary"
@@ -250,116 +381,18 @@ const Home = () => {
           onClick={handleStartChat}
           sx={{
             position: "fixed",
-            bottom: 60,
-            right: 24,
-            zIndex: 10,
-            boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-            animation: "pulse 2s infinite",
+            bottom: 16,
+            right: 16,
+            background: "linear-gradient(135deg, #3a6073, #2a4a5a)",
+            color: "#f0f4f8",
             "&:hover": {
-              transform: "scale(1.1)",
+              background: "linear-gradient(135deg, #4a7083, #3a6073)",
             },
           }}
         >
           <ChatIcon />
         </Fab>
       )}
-      {/* Footer */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          width: { xs: '100%', md: '70%' },
-          textAlign: "center", 
-          padding: "15px",
-          backdropFilter: "blur(2px)",
-          position: "fixed",
-        }}
-      >
-        <Typography
-          component="div"
-          sx={{
-            color: "#2c3e50",
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: 400,
-            letterSpacing: "0.5px",
-            fontSize: "16px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "4px",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          A Chat webapp by
-          <a 
-            href="https://mevinay.vercel.app/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{ 
-              textDecoration: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              position: 'relative',
-              zIndex: 1
-            }}
-          >
-            <Typography
-              component="span"
-              sx={{
-                background: "linear-gradient(-45deg, rgba(95, 185, 169, 0.2), rgba(92, 157, 203, 0.2))",
-                padding: "1px 10px",
-                fontSize: "14px",
-                fontStyle: "italic",
-                borderRadius: "20px",
-                fontWeight: 500,
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-                position: "relative",
-                overflow: "hidden",
-                display: "inline-block",
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  top: 0,
-                  left: "-100%",
-                  width: "100%",
-                  height: "100%",
-                  background: "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)",
-                  transition: "0.5s",
-                },
-                "&:hover": {
-                  background: "linear-gradient(-45deg, #5fb9a9, rgb(92, 157, 203))",
-                  color: "white",
-                  transform: "translateY(-1px)",
-                  boxShadow: "0 4px 15px rgba(92, 157, 203, 0.3)",
-                  "&::before": {
-                    left: "100%",
-                  },
-                },
-                "& .sparkle": {
-                  position: "absolute",
-                  background: "red",
-                  width: "20px",
-                  height: "20px",
-                  borderRadius: "50%",
-                  transition: "0.5s",
-                  opacity: 0,
-                },
-                "&:hover .sparkle": {
-                  opacity: 1,
-                  transform: "rotate(45deg) translate(75px, -75px) scale(2)",
-                },
-              }}
-            >
-              <span className="sparkle" style={{ top: "60%", left: "40%" }} />
-              <span className="sparkle" style={{ top: "40%", left: "60%" }} />
-              <span className="sparkle" style={{ top: "80%", left: "80%" }} />
-              Yash Yadav⚡
-            </Typography>
-          </a>
-        </Typography>
-      </Box>
     </Box>
   );
 };

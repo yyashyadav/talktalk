@@ -30,6 +30,7 @@ import Header from "./Header";
 import UserProfileSidebar from "../specific/UserProfileSidebar";
 import { Search as SearchIcon, Close as CloseIcon } from "@mui/icons-material";
 import { ChatItemSkeleton } from "./Loaders";
+import { sidebarBg, chatContainerBg, inputBg, headerBg } from "../../constants/color";
 
 const AppLayout = () => (WrappedComponent) => {
   return (props) => {
@@ -132,6 +133,7 @@ const AppLayout = () => (WrappedComponent) => {
           display: "flex",
           flexDirection: "column",
           overflow: "hidden",
+          background: "linear-gradient(to right, #16222a, #3a6073)",
         }}>
           {/* Mobile View */}
           {isMobile && (
@@ -147,12 +149,12 @@ const AppLayout = () => (WrappedComponent) => {
               <Box
                 sx={{
                   p: 1.5,
-                  borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
-                  backgroundColor: "background.paper",
+                  borderBottom: "1px solid rgba(240, 244, 248, 0.1)",
+                  backgroundColor: sidebarBg,
                   position: "sticky",
                   top: 0,
                   zIndex: 2,
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
                   backdropFilter: "blur(8px)",
                   transition: "all 0.2s ease"
                 }}
@@ -166,29 +168,41 @@ const AppLayout = () => (WrappedComponent) => {
                   size="small"
                   sx={{
                     '& .MuiOutlinedInput-root': {
+                      backgroundColor: inputBg,
+                      color: '#f0f4f8',
                       '&:hover .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#5fb9a9',
+                        borderColor: '#3a6073',
                       },
                       '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#5fb9a9',
+                        borderColor: '#3a6073',
+                      },
+                      '& fieldset': {
+                        borderColor: 'rgba(240, 244, 248, 0.2)',
                       },
                     },
                     '& .MuiInputLabel-root.Mui-focused': {
-                      color: '#5fb9a9',
+                      color: '#f0f4f8',
+                    },
+                    '& .MuiInputBase-input': {
+                      color: '#f0f4f8',
+                      '&::placeholder': {
+                        color: 'rgba(240, 244, 248, 0.6)',
+                        opacity: 1,
+                      },
                     },
                   }}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                       <SearchIcon sx={{ 
-                        color: 'text.secondary',
+                        color: 'rgba(240, 244, 248, 0.7)',
                         transition: 'all 0.2s ease',
                         '&:hover': {
-                          color: '#5fb9a9',
+                          color: '#f0f4f8',
                           cursor: 'default',
                         },
                         '.MuiInputBase-root.Mui-focused &': {
-                          color: '#5fb9a9'
+                          color: '#f0f4f8'
                         }
                       }} />
                     </InputAdornment>
@@ -199,11 +213,11 @@ const AppLayout = () => (WrappedComponent) => {
                           size="small" 
                           onClick={() => setSearchQuery('')}
                           sx={{ 
-                            color: 'text.secondary',
+                            color: 'rgba(240, 244, 248, 0.7)',
                             transition: 'all 0.2s ease',
                             '&:hover': {
-                              color: '#5fb9a9',
-                              backgroundColor: 'rgba(95, 185, 169, 0.1)',
+                              color: '#f0f4f8',
+                              backgroundColor: 'rgba(240, 244, 248, 0.1)',
                             }
                           }}
                         >
@@ -220,26 +234,27 @@ const AppLayout = () => (WrappedComponent) => {
                 sx={{
                   flex: 1,
                   overflowY: "auto",
+                  backgroundColor: sidebarBg,
                   '&::-webkit-scrollbar': {
                     width: '10px',
                     height: '10px'
                   },
                   '&::-webkit-scrollbar-track': {
-                    background: 'rgba(0, 0, 0, 0.03)',
+                    background: 'rgba(240, 244, 248, 0.05)',
                     borderRadius: '10px',
                     margin: '2px'
                   },
                   '&::-webkit-scrollbar-thumb': {
-                    background: 'linear-gradient(45deg, #5fb9a9, rgb(92, 157, 203))',
+                    background: 'linear-gradient(45deg, #3a6073, #2a4a5a)',
                     borderRadius: '10px',
-                    border: '2px solid rgba(255, 255, 255, 0.8)',
-                    boxShadow: 'inset 0 0 6px rgba(0,0,0,0.1)',
+                    border: '2px solid rgba(240, 244, 248, 0.1)',
+                    boxShadow: 'inset 0 0 6px rgba(0,0,0,0.2)',
                     transition: 'all 0.3s ease'
                   },
                   '&::-webkit-scrollbar-thumb:hover': {
-                    background: 'linear-gradient(45deg, #4da697, rgb(82, 141, 182))',
-                    border: '2px solid rgba(255, 255, 255, 0.9)',
-                    boxShadow: 'inset 0 0 8px rgba(0,0,0,0.2)'
+                    background: 'linear-gradient(45deg, #4a7083, #3a6073)',
+                    border: '2px solid rgba(240, 244, 248, 0.2)',
+                    boxShadow: 'inset 0 0 8px rgba(0,0,0,0.3)'
                   },
                   '&::-webkit-scrollbar-corner': {
                     background: 'transparent'
@@ -279,43 +294,43 @@ const AppLayout = () => (WrappedComponent) => {
                   },
                   display: { xs: "none", sm: "block" },
                   transition: "width 0.3s ease",
-                  borderRight: "1px solid rgba(0, 0, 0, 0.1)",
+                  borderRight: "1px solid rgba(240, 244, 248, 0.1)",
                   height: "100%",
                   position: "relative",
                   overflow: "hidden",
-                  backgroundColor: "#bac8e0",
+                  backgroundColor: sidebarBg,
                   zIndex: 10,
                   isolation: "isolate",
                   '& .MuiListItem-root': {
                     transition: 'all 0.3s ease',
                     '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      backgroundColor: 'rgba(58, 96, 115, 0.3)',
                       transform: 'translateX(5px)',
                       '& .MuiTypography-root': {
-                        color: '#2c3e50',
+                        color: '#f0f4f8',
                       },
                     },
                     '&.Mui-selected': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.4)',
-                      borderLeft: '4px solid #2c3e50',
+                      backgroundColor: 'rgba(58, 96, 115, 0.5)',
+                      borderLeft: '4px solid #3a6073',
                       '&:hover': {
-                        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                        backgroundColor: 'rgba(58, 96, 115, 0.6)',
                       },
                       '& .MuiTypography-root': {
-                        color: '#1a1a1a',
+                        color: '#f0f4f8',
                         fontWeight: 600,
                       },
                       '& .MuiListItemText-primary': {
-                        color: '#1a1a1a',
+                        color: '#f0f4f8',
                         fontWeight: 700,
                       },
                       '& .MuiListItemText-secondary': {
-                        color: '#2c3e50',
+                        color: 'rgba(240, 244, 248, 0.7)',
                         fontWeight: 500,
                       },
                       '& .MuiAvatar-root': {
-                        border: '2px solid #2c3e50',
-                        boxShadow: '0 0 8px rgba(44, 62, 80, 0.3)',
+                        border: '2px solid #3a6073',
+                        boxShadow: '0 0 8px rgba(58, 96, 115, 0.3)',
                       },
                     },
                   },
@@ -327,7 +342,7 @@ const AppLayout = () => (WrappedComponent) => {
                     position: 'absolute',
                     bottom: '2px',
                     right: '2px',
-                    border: '2px solid #bac8e0',
+                    border: '2px solid #16222a',
                     boxShadow: '0 0 0 2px rgba(76, 175, 80, 0.3)',
                     animation: 'pulse 2s infinite',
                     '&::after': {
@@ -348,12 +363,12 @@ const AppLayout = () => (WrappedComponent) => {
                 <Box
                   sx={{
                     p: 1.5,
-                    borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    borderBottom: "1px solid rgba(240, 244, 248, 0.1)",
+                    backgroundColor: sidebarBg,
                     position: "sticky",
                     top: 0,
                     zIndex: 1,
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
                     backdropFilter: "blur(8px)",
                     transition: "all 0.2s ease"
                   }}
@@ -367,30 +382,41 @@ const AppLayout = () => (WrappedComponent) => {
                     size="small"
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                        backgroundColor: inputBg,
+                        color: '#f0f4f8',
                         '&:hover .MuiOutlinedInput-notchedOutline': {
-                          borderColor: '#2c3e50',
+                          borderColor: '#3a6073',
                         },
                         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                          borderColor: '#2c3e50',
+                          borderColor: '#3a6073',
+                        },
+                        '& fieldset': {
+                          borderColor: 'rgba(240, 244, 248, 0.2)',
                         },
                       },
                       '& .MuiInputLabel-root.Mui-focused': {
-                        color: '#2c3e50',
+                        color: '#f0f4f8',
+                      },
+                      '& .MuiInputBase-input': {
+                        color: '#f0f4f8',
+                        '&::placeholder': {
+                          color: 'rgba(240, 244, 248, 0.6)',
+                          opacity: 1,
+                        },
                       },
                     }}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
                         <SearchIcon sx={{ 
-                          color: '#2c3e50',
+                          color: 'rgba(240, 244, 248, 0.7)',
                           transition: 'all 0.2s ease',
                           '&:hover': {
-                            color: '#1a1a1a',
+                            color: '#f0f4f8',
                             cursor: 'default',
                           },
                           '.MuiInputBase-root.Mui-focused &': {
-                            color: '#1a1a1a'
+                            color: '#f0f4f8'
                           }
                         }} />
                       </InputAdornment>
@@ -401,11 +427,11 @@ const AppLayout = () => (WrappedComponent) => {
                             size="small" 
                             onClick={() => setSearchQuery('')}
                             sx={{ 
-                              color: '#2c3e50',
+                              color: 'rgba(240, 244, 248, 0.7)',
                               transition: 'all 0.2s ease',
                               '&:hover': {
-                                color: '#1a1a1a',
-                                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                                color: '#f0f4f8',
+                                backgroundColor: 'rgba(240, 244, 248, 0.1)',
                               }
                             }}
                           >
@@ -422,26 +448,27 @@ const AppLayout = () => (WrappedComponent) => {
                   sx={{
                     height: "calc(100% - 56px)",
                     overflow: "auto",
+                    backgroundColor: sidebarBg,
                     '&::-webkit-scrollbar': {
                       width: '10px',
                       height: '10px'
                     },
                     '&::-webkit-scrollbar-track': {
-                      background: 'rgba(0, 0, 0, 0.03)',
+                      background: 'rgba(240, 244, 248, 0.05)',
                       borderRadius: '10px',
                       margin: '2px'
                     },
                     '&::-webkit-scrollbar-thumb': {
-                      background: 'linear-gradient(45deg, #5fb9a9, rgb(92, 157, 203))',
+                      background: 'linear-gradient(45deg, #3a6073, #2a4a5a)',
                       borderRadius: '10px',
-                      border: '2px solid rgba(255, 255, 255, 0.8)',
-                      boxShadow: 'inset 0 0 6px rgba(0,0,0,0.1)',
+                      border: '2px solid rgba(240, 244, 248, 0.1)',
+                      boxShadow: 'inset 0 0 6px rgba(0,0,0,0.2)',
                       transition: 'all 0.3s ease'
                     },
                     '&::-webkit-scrollbar-thumb:hover': {
-                      background: 'linear-gradient(45deg, #4da697, rgb(82, 141, 182))',
-                      border: '2px solid rgba(255, 255, 255, 0.9)',
-                      boxShadow: 'inset 0 0 8px rgba(0,0,0,0.2)'
+                      background: 'linear-gradient(45deg, #4a7083, #3a6073)',
+                      border: '2px solid rgba(240, 244, 248, 0.2)',
+                      boxShadow: 'inset 0 0 8px rgba(0,0,0,0.3)'
                     },
                     '&::-webkit-scrollbar-corner': {
                       background: 'transparent'
@@ -478,7 +505,8 @@ const AppLayout = () => (WrappedComponent) => {
                   display: { xs: "block", sm: "block" },
                   transition: "width 0.3s ease",
                   height: "100%",
-                  overflow: "auto"
+                  overflow: "auto",
+                  backgroundColor: chatContainerBg,
                 }}
               >
                 <WrappedComponent {...props} chatId={chatId} user={user} />
@@ -496,33 +524,33 @@ const AppLayout = () => (WrappedComponent) => {
                     },
                     height: "100%",
                     display: { xs: "none", sm: "block" },
-                    borderLeft: "1px solid rgba(0, 0, 0, 0.1)",
+                    borderLeft: "1px solid rgba(240, 244, 248, 0.1)",
                     overflow: "auto",
                     position: "relative",
                     zIndex: 10,
-                    backgroundColor: "background.paper",
-                    boxShadow: "-1px 0 5px rgba(0,0,0,0.05)",
+                    backgroundColor: sidebarBg,
+                    boxShadow: "-1px 0 5px rgba(0,0,0,0.2)",
                     isolation: "isolate",
                     '&::-webkit-scrollbar': {
                       width: '10px',
                       height: '10px'
                     },
                     '&::-webkit-scrollbar-track': {
-                      background: 'rgba(0, 0, 0, 0.03)',
+                      background: 'rgba(240, 244, 248, 0.05)',
                       borderRadius: '10px',
                       margin: '2px'
                     },
                     '&::-webkit-scrollbar-thumb': {
-                      background: 'linear-gradient(45deg, #5fb9a9, rgb(92, 157, 203))',
+                      background: 'linear-gradient(45deg, #3a6073, #2a4a5a)',
                       borderRadius: '10px',
-                      border: '2px solid rgba(255, 255, 255, 0.8)',
-                      boxShadow: 'inset 0 0 6px rgba(0,0,0,0.1)',
+                      border: '2px solid rgba(240, 244, 248, 0.1)',
+                      boxShadow: 'inset 0 0 6px rgba(0,0,0,0.2)',
                       transition: 'all 0.3s ease'
                     },
                     '&::-webkit-scrollbar-thumb:hover': {
-                      background: 'linear-gradient(45deg, #4da697, rgb(82, 141, 182))',
-                      border: '2px solid rgba(255, 255, 255, 0.9)',
-                      boxShadow: 'inset 0 0 8px rgba(0,0,0,0.2)'
+                      background: 'linear-gradient(45deg, #4a7083, #3a6073)',
+                      border: '2px solid rgba(240, 244, 248, 0.2)',
+                      boxShadow: 'inset 0 0 8px rgba(0,0,0,0.3)'
                     },
                     '&::-webkit-scrollbar-corner': {
                       background: 'transparent'
@@ -547,27 +575,27 @@ const AppLayout = () => (WrappedComponent) => {
                 width: '100%',
                 maxWidth: '100%',
                 zIndex: 1300,
-                backgroundColor: "background.paper",
+                backgroundColor: sidebarBg,
                 '&::-webkit-scrollbar': {
                   width: '10px',
                   height: '10px'
                 },
                 '&::-webkit-scrollbar-track': {
-                  background: 'rgba(0, 0, 0, 0.03)',
+                  background: 'rgba(240, 244, 248, 0.05)',
                   borderRadius: '10px',
                   margin: '2px'
                 },
                 '&::-webkit-scrollbar-thumb': {
-                  background: 'linear-gradient(45deg, #5fb9a9, rgb(92, 157, 203))',
+                  background: 'linear-gradient(45deg, #3a6073, #2a4a5a)',
                   borderRadius: '10px',
-                  border: '2px solid rgba(255, 255, 255, 0.8)',
-                  boxShadow: 'inset 0 0 6px rgba(0,0,0,0.1)',
+                  border: '2px solid rgba(240, 244, 248, 0.1)',
+                  boxShadow: 'inset 0 0 6px rgba(0,0,0,0.2)',
                   transition: 'all 0.3s ease'
                 },
                 '&::-webkit-scrollbar-thumb:hover': {
-                  background: 'linear-gradient(45deg, #4da697, rgb(82, 141, 182))',
-                  border: '2px solid rgba(255, 255, 255, 0.9)',
-                  boxShadow: 'inset 0 0 8px rgba(0,0,0,0.2)'
+                  background: 'linear-gradient(45deg, #4a7083, #3a6073)',
+                  border: '2px solid rgba(240, 244, 248, 0.2)',
+                  boxShadow: 'inset 0 0 8px rgba(0,0,0,0.3)'
                 },
                 '&::-webkit-scrollbar-corner': {
                   background: 'transparent'

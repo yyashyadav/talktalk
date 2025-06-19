@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import AppLayout from "../components/layout/AppLayout";
 import { IconButton, Skeleton, Stack, ClickAwayListener, Box } from "@mui/material";
-import { grayColor, orange, chatBgPattern, myblue } from "../constants/color";
+import { grayColor, orange, chatBgPattern, myblue, chatContainerBg, inputBg, headerBg } from "../constants/color";
 import {
   AttachFile as AttachFileIcon,
   Send as SendIcon,
@@ -459,7 +459,8 @@ const Chat = ({ chatId, user }) => {
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%',
-        position: 'relative'
+        position: 'relative',
+        background: chatContainerBg,
       }}>
         <ChatHeader 
           chat={chatDetails?.data?.chat}
@@ -496,17 +497,17 @@ const Chat = ({ chatId, user }) => {
               width: '6px'
             },
             '&::-webkit-scrollbar-track': {
-              background: 'rgba(0, 0, 0, 0.04)',
+              background: 'rgba(240, 244, 248, 0.05)',
               borderRadius: '10px'
             },
             '&::-webkit-scrollbar-thumb': {
-              background: '#E0E0E0',
+              background: 'linear-gradient(45deg, #3a6073, #2a4a5a)',
               borderRadius: '10px',
-              border: '1px solid rgba(255, 255, 255, 0.6)',
+              border: '1px solid rgba(240, 244, 248, 0.1)',
               transition: 'all 0.2s ease'
             },
             '&::-webkit-scrollbar-thumb:hover': {
-              background: '#BDBDBD'
+              background: 'linear-gradient(45deg, #4a7083, #3a6073)'
             }
           }}
           onContextMenu={(e) => handleContextMenu(e, 'chat', chatDetails.data?.chat)}
@@ -535,9 +536,9 @@ const Chat = ({ chatId, user }) => {
         <form
           style={{
             height: { xs: "60px", sm: "70px" },
-            background: myblue,
+            background: headerBg,
             position: "relative",
-            borderTop: "1px solid rgba(0,0,0,0.1)"
+            borderTop: "1px solid rgba(240, 244, 248, 0.1)"
           }}
           onSubmit={submitHandler}
         >
@@ -576,15 +577,16 @@ const Chat = ({ chatId, user }) => {
               display: 'flex', 
               alignItems: 'center', 
               flex: 1,
-              bgcolor: 'rgba(255,255,255,0.1)',
+              bgcolor: inputBg,
               borderRadius: '20px',
-              px: 1
+              px: 1,
+              border: '1px solid rgba(240, 244, 248, 0.1)'
             }}>
               <IconButton
                 sx={{
-                  color: "white",
+                  color: "#f0f4f8",
                   '&:hover': {
-                    backgroundColor: 'rgba(255,255,255,0.1)'
+                    backgroundColor: 'rgba(240, 244, 248, 0.1)'
                   }
                 }}
                 onClick={handleFileOpen}
@@ -594,9 +596,9 @@ const Chat = ({ chatId, user }) => {
 
               <IconButton
                 sx={{
-                  color: "white",
+                  color: "#f0f4f8",
                   '&:hover': {
-                    backgroundColor: 'rgba(255,255,255,0.1)'
+                    backgroundColor: 'rgba(240, 244, 248, 0.1)'
                   }
                 }}
                 onClick={() => setIsBgDialogOpen(true)}
@@ -606,9 +608,9 @@ const Chat = ({ chatId, user }) => {
 
               <IconButton
                 sx={{
-                  color: showEmojiPicker ? orange : "white",
+                  color: showEmojiPicker ? orange : "#f0f4f8",
                   '&:hover': {
-                    backgroundColor: 'rgba(255,255,255,0.1)'
+                    backgroundColor: 'rgba(240, 244, 248, 0.1)'
                   }
                 }}
                 onClick={() => setShowEmojiPicker(!showEmojiPicker)}
@@ -623,17 +625,19 @@ const Chat = ({ chatId, user }) => {
                   fontSize: { xs: "0.9rem", sm: "1rem" },
                   fontWeight: "400",
                   padding: { xs: "0.5rem", sm: "0.7rem" },
-                  color: "white",
+                  color: "#f0f4f8",
                   backgroundColor: "transparent",
+                  border: "none",
+                  outline: "none",
                   '&::placeholder': {
-                    color: "rgba(255,255,255,0.9)"
+                    color: "rgba(240, 244, 248, 0.6)"
                   },
                   '&:focus': {
-                    color: "black",
-                    backgroundColor: 'white',
+                    color: "#f0f4f8",
+                    backgroundColor: 'transparent',
                     transition: 'all 0.2s ease',
                     '&::placeholder': {
-                      color: "rgba(0,0,0,0.5)"
+                      color: "rgba(240, 244, 248, 0.4)"
                     }
                   }
                 }}
@@ -648,7 +652,7 @@ const Chat = ({ chatId, user }) => {
               <IconButton
                 type="submit"
                 sx={{
-                  color: "white",
+                  color: "#f0f4f8",
                   backgroundColor: orange,
                   rotate: "-30deg",
                   padding: { xs: "0.4rem", sm: "0.5rem" },

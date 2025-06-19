@@ -10,6 +10,7 @@ import { SocketProvider } from "./socket";
 import { getAdmin } from "./redux/thunks/admin";
 import SelectionContextMenu from './components/shared/SelectionContextMenu';
 import InitialLoader from './components/layout/InitialLoader';
+import AdminThemeProvider from './components/AdminThemeProvider';
 
 // Lazy load components with preload
 const lazyWithPreload = (importFn) => {
@@ -114,6 +115,9 @@ const AppContent = () => {
     return <Navigate to="/login" replace />;
   }
 
+  // Check if current route is an admin route
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   return (
     <Routes>
       <Route
@@ -137,11 +141,47 @@ const AppContent = () => {
         }
       />
 
-      <Route path="/admin" element={<AdminLogin />} />
-      <Route path="/admin/dashboard" element={<Dashboard />} />
-      <Route path="/admin/users" element={<UserManagement />} />
-      <Route path="/admin/chats" element={<ChatManagement />} />
-      <Route path="/admin/messages" element={<MessagesManagement />} />
+      {/* Admin routes wrapped with AdminThemeProvider */}
+      <Route
+        path="/admin"
+        element={
+          <AdminThemeProvider>
+            <AdminLogin />
+          </AdminThemeProvider>
+        }
+      />
+      <Route
+        path="/admin/dashboard"
+        element={
+          <AdminThemeProvider>
+            <Dashboard />
+          </AdminThemeProvider>
+        }
+      />
+      <Route
+        path="/admin/users"
+        element={
+          <AdminThemeProvider>
+            <UserManagement />
+          </AdminThemeProvider>
+        }
+      />
+      <Route
+        path="/admin/chats"
+        element={
+          <AdminThemeProvider>
+            <ChatManagement />
+          </AdminThemeProvider>
+        }
+      />
+      <Route
+        path="/admin/messages"
+        element={
+          <AdminThemeProvider>
+            <MessagesManagement />
+          </AdminThemeProvider>
+        }
+      />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

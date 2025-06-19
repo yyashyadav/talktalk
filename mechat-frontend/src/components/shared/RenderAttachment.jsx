@@ -1,23 +1,28 @@
 import React from "react";
-import { transformImage } from "../../lib/features";
+import { transformImage, fileFormat } from "../../lib/features";
 import { InsertDriveFile as InsertDriveFileIcon } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 
-const RenderAttachment = (file, url) => {
+const RenderAttachment = ({ attachment, isMe }) => {
+  if (!attachment) return null;
+  // Support both string and object
+  let url = attachment.url || attachment;
+  const file = fileFormat(url);
+
   switch (file) {
     case "video":
-      return <video src={url} preload="none" width={"300px"} controls />;
+      return <video src={url} preload="none" width={"300px"} controls style={{ borderRadius: 8, background: isMe ? "#222" : "#111" }} />;
 
     case "image":
       return (
         <img
           src={transformImage(url, 200)}
           alt="Attachment"
-          // width={"200px"}
-          // height={"150px"}
           style={{
             objectFit: "contain",
             maxWidth: "100%",
+            borderRadius: 8,
+            background: isMe ? "#222" : "#111"
           }}
         />
       );
@@ -28,7 +33,7 @@ const RenderAttachment = (file, url) => {
           src={url} 
           preload="none" 
           controls 
-          // style={{ width: "300px" }}
+          style={{ width: "100%" }}
         />
       );
 
@@ -37,18 +42,18 @@ const RenderAttachment = (file, url) => {
         <Box
           sx={{
             display: "flex",
-            backgroundColor: "#f0f0f0",
+            backgroundColor: isMe ? "#2a4a5a" : "#1e2a35",
             alignItems: "center",
             gap: "0.5rem",
             padding: "0.5rem",
-            border: "1px solid #ccc",
+            border: "1px solid #3a6073",
             borderRadius: "8px",
             width: "200px",
           }}
         >
-          <InsertDriveFileIcon />
-          <Typography variant="body2" sx={{ wordBreak: "break-all" }}>
-            {url.split("/").pop()}
+          <InsertDriveFileIcon sx={{ color: "#f0f4f8" }} />
+          <Typography variant="body2" sx={{ wordBreak: "break-all", color: "#f0f4f8" }}>
+            {typeof url === "string" && url.split ? url.split("/").pop() : "File"}
           </Typography>
         </Box>
       );

@@ -21,36 +21,35 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { Link as LinkComponent, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { grayColor, matBlack, myblue } from "../../constants/color";
 import { useDispatch, useSelector } from "react-redux";
 import { adminLogout } from "../../redux/thunks/admin";
 // import meChatIcon from "../../assets/meChatIcon.png";
 import Logo from '../shared/Logo';
 
-const Link = styled(LinkComponent)`
-  text-decoration: none;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  color: rgba(0, 0, 0, 0.7);
-  transition: all 0.2s ease;
-  position: relative;
+const Link = styled(LinkComponent)(({ theme }) => ({
+  textDecoration: 'none',
+  borderRadius: '0.5rem',
+  padding: '0.75rem 1.5rem',
+  color: theme.palette.text.secondary,
+  transition: 'all 0.2s ease',
+  position: 'relative',
   
-  &:hover {
-    color: ${myblue};
-    background: rgba(95, 185, 169, 0.05);
+  '&:hover': {
+    color: theme.palette.primary.main,
+    background: `${theme.palette.primary.main}10`,
     
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 3px;
-      background: ${myblue};
-      border-radius: 0 2px 2px 0;
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      height: '100%',
+      width: '3px',
+      background: theme.palette.primary.main,
+      borderRadius: '0 2px 2px 0',
     }
   }
-`;
+}));
 
 const adminTabs = [
   {
@@ -143,7 +142,11 @@ const Sidebar = ({ w = "100%" }) => {
           <Logo size={isMobile ? 48 : 56} />
           <Typography 
             variant={isMobile ? "h6" : "h5"} 
-            sx={{ fontSize: isMobile ? "1.25rem" : "1.5rem", fontFamily: "monospace" }}
+            sx={{ 
+              fontSize: isMobile ? "1.25rem" : "1.5rem", 
+              fontFamily: "monospace",
+              color: theme.palette.text.primary
+            }}
           >
             TalkTalk
           </Typography>
@@ -157,8 +160,8 @@ const Sidebar = ({ w = "100%" }) => {
             to={tab.path}
             sx={{
               ...(location.pathname === tab.path && {
-                color: myblue,
-                background: "rgba(95, 185, 169, 0.1)",
+                color: theme.palette.primary.main,
+                background: `${theme.palette.primary.main}10`,
                 "&::after": {
                   content: '""',
                   position: "absolute",
@@ -166,12 +169,12 @@ const Sidebar = ({ w = "100%" }) => {
                   top: 0,
                   height: "100%",
                   width: "3px",
-                  background: myblue,
+                  background: theme.palette.primary.main,
                   borderRadius: "0 2px 2px 0",
                 },
                 ":hover": { 
-                  color: myblue,
-                  background: "rgba(95, 185, 169, 0.1)",
+                  color: theme.palette.primary.main,
+                  background: `${theme.palette.primary.main}10`,
                 },
               }),
               padding: isMobile ? "0.75rem 1.5rem" : "1rem 2rem",
@@ -179,7 +182,10 @@ const Sidebar = ({ w = "100%" }) => {
           >
             <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
               {tab.icon}
-              <Typography sx={{ fontSize: isMobile ? "0.875rem" : "1rem" }}>
+              <Typography sx={{ 
+                fontSize: isMobile ? "0.875rem" : "1rem",
+                color: "inherit"
+              }}>
                 {tab.name}
               </Typography>
             </Stack>
@@ -192,7 +198,10 @@ const Sidebar = ({ w = "100%" }) => {
         >
           <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
             <ArrowBackIcon sx={{ fontSize: isMobile ? "1.25rem" : "1.5rem" }} />
-            <Typography sx={{ fontSize: isMobile ? "0.875rem" : "1rem" }}>
+            <Typography sx={{ 
+              fontSize: isMobile ? "0.875rem" : "1rem",
+              color: "inherit"
+            }}>
               Back to Chat
             </Typography>
           </Stack>
@@ -204,7 +213,10 @@ const Sidebar = ({ w = "100%" }) => {
         >
           <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
             <ExitToAppIcon sx={{ fontSize: isMobile ? "1.25rem" : "1.5rem" }} />
-            <Typography sx={{ fontSize: isMobile ? "0.875rem" : "1rem" }}>
+            <Typography sx={{ 
+              fontSize: isMobile ? "0.875rem" : "1rem",
+              color: "inherit"
+            }}>
               Logout
             </Typography>
           </Stack>
@@ -241,10 +253,10 @@ const AdminLayout = ({ children }) => {
           <IconButton 
             onClick={handleDrawerToggle}
             sx={{ 
-              bgcolor: "white",
+              bgcolor: theme.palette.background.paper,
               boxShadow: isDrawerOpen ? 0 : 1,
               "&:hover": { 
-                bgcolor: "white",
+                bgcolor: theme.palette.background.paper,
                 boxShadow: isDrawerOpen ? 0 : 2
               }
             }}
@@ -261,10 +273,11 @@ const AdminLayout = ({ children }) => {
         lg={3} 
         sx={{ 
           display: { xs: "none", md: "block" },
-          borderRight: "1px solid rgba(0, 0, 0, 0.1)",
+          borderRight: `1px solid ${theme.palette.divider}`,
           height: "100vh",
           position: "sticky",
           top: 0,
+          bgcolor: theme.palette.background.paper
         }}
       >
         <Sidebar />
@@ -277,7 +290,7 @@ const AdminLayout = ({ children }) => {
         md={8}
         lg={9}
         sx={{
-          bgcolor: grayColor,
+          bgcolor: theme.palette.background.default,
           minHeight: "100vh",
           p: { xs: 2, md: 3 },
         }}
@@ -296,6 +309,7 @@ const AdminLayout = ({ children }) => {
             width: '100%',
             maxWidth: '300px',
             zIndex: 1200,
+            bgcolor: theme.palette.background.paper
           }
         }}
       >

@@ -71,6 +71,21 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+  // this function handles the mouse movement to create a parallax effect on the icon
+    const [iconOffset, setIconOffset] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const offsetX = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+      const offsetY = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
+
+      setIconOffset({ x: offsetX, y: offsetY });
+    };
+
+    const handleMouseLeave = () => {
+      setIconOffset({ x: 0, y: 0 });
+    };
+
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -192,26 +207,35 @@ const Login = () => {
             },
           }}
         >
-          <Box sx={{ 
-            mb: 2, 
-            display: "flex", 
-            alignItems: "center", 
-            justifyContent: "center",
-            userSelect: "none",
-            position: "relative",
-            zIndex: 1
-          }}>
-            <img 
-              src={talktalkIcon} 
-              alt="TalkTalk"
-              style={{
-                width: "120px",
-                height: "120px",
-                objectFit: "contain",
-                filter: "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))"
+        <Box
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              sx={{
+                mb: 2,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                userSelect: "none",
+                position: "relative",
+                zIndex: 1,
+                width: "140px",
+                height: "140px",
               }}
-            />
+            >
+              <img
+                src={talktalkIcon}
+                alt="TalkTalk"
+                style={{
+                  width: "120px",
+                  height: "120px",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))",
+                  transition: "transform 0.2s ease-out",
+                  transform: `translate(${iconOffset.x}px, ${iconOffset.y}px)`,
+                }}
+              />
           </Box>
+
 
           {isLogin ? (
             <>
@@ -300,52 +324,54 @@ const Login = () => {
                     }}
                   />
 
-                  <Button
-                    sx={{
-                      mt: 3,
-                      mb: 2,
-                      backgroundColor: primaryColor,
-                      color: "#ffffff",
-                      '&:hover': {
-                        backgroundColor: "rgb(82, 147, 193)",
-                        transform: "translateY(-1px)",
-                        boxShadow: "0 4px 12px rgba(92, 157, 203, 0.3)",
-                      },
-                      padding: "10px",
-                      borderRadius: "8px",
-                      textTransform: "none",
-                      fontSize: "1rem",
-                      transition: "all 0.2s ease",
-                    }}
-                    variant="contained"
-                    type="submit"
-                    fullWidth
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Logging In..." : "Login"}
-                  </Button>
+                 <Button
+                      sx={{
+                        mt: 3,
+                        mb: 2,
+                        background: "linear-gradient(135deg, #28a745, #218838)",
+                        color: "#ffffff",
+                        '&:hover': {
+                          background: "linear-gradient(135deg, #218838, #1e7e34)",
+                          transform: "translateY(-1px)",
+                          boxShadow: "0 4px 12px rgba(40, 167, 69, 0.4)",
+                        },
+                        padding: "10px",
+                        borderRadius: "8px",
+                        textTransform: "none",
+                        fontSize: "1rem",
+                        transition: "all 0.2s ease",
+                      }}
+                      variant="contained"
+                      type="submit"
+                      fullWidth
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Logging In..." : "Login"}
+                </Button>
+
 
                   <Button
-                    sx={{
-                      backgroundColor: secondaryColor,
-                      color: "#ffffff",
-                      '&:hover': {
-                        backgroundColor: "rgb(85, 175, 159)",
-                        transform: "translateY(-1px)",
-                        boxShadow: "0 4px 12px rgba(95, 185, 169, 0.3)",
-                      },
-                      padding: "10px",
-                      borderRadius: "8px",
-                      textTransform: "none",
-                      transition: "all 0.2s ease",
-                    }}
-                    variant="contained"
-                    fullWidth
-                    disabled={isLoading}
-                    onClick={handleGuestLogin}
-                  >
-                    Guest Login (For Interviewers)
+                      sx={{
+                        background: "linear-gradient(135deg, #007bff, #0056b3)",
+                        color: "#ffffff",
+                        '&:hover': {
+                          background: "linear-gradient(135deg, #0056b3, #004085)",
+                          transform: "translateY(-1px)",
+                          boxShadow: "0 4px 12px rgba(0, 123, 255, 0.4)",
+                        },
+                        padding: "10px",
+                        borderRadius: "8px",
+                        textTransform: "none",
+                        transition: "all 0.2s ease",
+                      }}
+                      variant="contained"
+                      fullWidth
+                      disabled={isLoading}
+                      onClick={handleGuestLogin}
+                    >
+                      Guest Login (For Interviewers)
                   </Button>
+
 
                   <Typography 
                     variant="caption" 
@@ -598,21 +624,31 @@ const Login = () => {
                     />
 
                     <Button
-                      sx={{
-                        marginTop: "1rem",
-                        backgroundColor: "#5c9ec9",
-                        color: "white",
-                        "&:hover": {
-                          backgroundColor: "#4d8ab0",
+                          sx={{
+                        mt: 3,
+                        mb: 2,
+                        background: "linear-gradient(135deg, #28a745, #218838)",
+                        color: "#ffffff",
+                        '&:hover': {
+                          background: "linear-gradient(135deg, #218838, #1e7e34)",
+                          transform: "translateY(-1px)",
+                          boxShadow: "0 4px 12px rgba(40, 167, 69, 0.4)",
                         },
+                        padding: "10px",
+                        borderRadius: "8px",
+                        textTransform: "none",
+                        fontSize: "1rem",
+                        transition: "all 0.2s ease",
                       }}
-                      variant="contained"
-                      type="submit"
-                      fullWidth
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Signing Up..." : "Sign Up"}
+                        variant="contained"
+                        type="submit"
+                        fullWidth
+                        disabled={isLoading}
+                      >
+                        {isLoading ? "Signing Up..." : "Sign Up"}
                     </Button>
+
+
 
                     <Typography textAlign={"center"} m={"1rem"}>
                     OR

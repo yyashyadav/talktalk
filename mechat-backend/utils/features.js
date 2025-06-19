@@ -5,7 +5,7 @@ import { v2 as cloudinary } from "cloudinary";
 import { getBase64, getSockets } from "../lib/helper.js";
 
 const cookieOptions = {
-  maxAge: 15 * 24 * 60 * 60 * 1000,
+  maxAge: 1 * 24 * 60 * 60 * 1000,
   sameSite: "none",
   httpOnly: true,
   secure: true,
@@ -18,8 +18,15 @@ const connectDB = (uri) => {
   mongoose
     .connect(uri, { 
       dbName: "meChatDB",
+
+      // retryWrites: true,
+    //   You are sending a message to a friend via WhatsApp. You hit Send, but suddenly the internet disconnects for 1 second.  WhatsApp automatically tries again in the background without telling you.
+    // Then the message goes through.
+
       retryWrites: true,
+      // MongoDB waits for most of your servers to confirm the write before it says “Done.”
       w: "majority",
+
       serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
       socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
     })
@@ -51,7 +58,8 @@ const connectDB = (uri) => {
       throw err;
     });
 };
-
+//create the user in stream also
+// and connect to the stream
 const sendToken = (res, user, code, message) => {
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
 
